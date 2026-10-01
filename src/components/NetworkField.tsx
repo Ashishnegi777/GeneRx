@@ -68,8 +68,8 @@ export const NetworkField: React.FC<NetworkFieldProps> = ({
       nodes = Array.from({ length: targetCount }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: (Math.random() - 0.5) * 0.22,
         radius: 1.5,
       }));
       packets = [];
@@ -159,13 +159,13 @@ export const NetworkField: React.FC<NetworkFieldProps> = ({
       }
 
       // Trigger packet every ~2.5 to 3.5 seconds
-      if (!prefersReducedMotion && time - lastPacketTime > 2600 && connectedPairs.length > 0) {
+      if (!prefersReducedMotion && time - lastPacketTime > 4500 && connectedPairs.length > 0) {
         const pair = connectedPairs[Math.floor(Math.random() * connectedPairs.length)];
         packets.push({
           fromIndex: pair[0],
           toIndex: pair[1],
           progress: 0,
-          speed: 0.015 + Math.random() * 0.01,
+          speed: 0.008 + Math.random() * 0.005,
         });
         lastPacketTime = time;
       }

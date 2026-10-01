@@ -5,6 +5,7 @@ import { GridBackdrop } from './GridBackdrop';
 import { SectionLabel } from './SectionLabel';
 import { BlurText } from './BlurText';
 import { Reveal } from './Reveal';
+import video from '../video/DNA.mp4';
 
 interface DomainItem {
   id: string;
@@ -33,7 +34,7 @@ const domains: DomainItem[] = [
           strokeLinejoin="round"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
+          transition={{ duration: 2.0, ease: 'easeInOut' }}
         />
         <motion.circle
           cx="105"
@@ -62,7 +63,7 @@ const domains: DomainItem[] = [
           strokeWidth="1.5"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
+          transition={{ duration: 2.0, ease: 'easeInOut' }}
         />
         <motion.path
           d="M 0 40 Q 40 70, 80 40 T 160 40 T 240 40 T 320 40"
@@ -72,7 +73,7 @@ const domains: DomainItem[] = [
           className="text-white/20"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
-          transition={{ duration: 1.2, delay: 0.2 }}
+          transition={{ duration: 2.0, delay: 0.2 }}
         />
       </svg>
     ),
@@ -97,7 +98,7 @@ const domains: DomainItem[] = [
           strokeDasharray="6 4"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
-          transition={{ duration: 1.0 }}
+          transition={{ duration: 1.6 }}
         />
         <motion.path
           d="M 40 20 H 50 V 10 M 270 10 V 20 H 280 M 40 60 H 50 V 70 M 270 70 V 60 H 280"
@@ -105,7 +106,7 @@ const domains: DomainItem[] = [
           strokeWidth="1.5"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 1.4, delay: 0.2 }}
         />
         <motion.circle
           cx="160"
@@ -139,7 +140,7 @@ const domains: DomainItem[] = [
           strokeWidth="1.5"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
+          transition={{ duration: 2.0, ease: 'easeInOut' }}
         />
         {[
           { cx: 30, cy: 40 },
@@ -176,7 +177,7 @@ export const SolutionsSection: React.FC = () => {
     >
       {/* Layer 1: Ambient Tech Video */}
       <FadingVideo
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260428_193507_4286c423-2fd9-4efd-92bd-91a939453fc1.mp4"
+        src={video}
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         style={{
           filter: 'brightness(0.3) contrast(1.2)',
@@ -245,7 +246,7 @@ export const SolutionsSection: React.FC = () => {
                   initial={{ opacity: 0, filter: 'blur(8px)', y: 15 }}
                   animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
                   exit={{ opacity: 0, filter: 'blur(8px)', y: -15 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                   className="flex flex-col justify-between h-full flex-1"
                 >
                   {/* Top: Animated Diagram */}
@@ -268,7 +269,7 @@ export const SolutionsSection: React.FC = () => {
                     <h3 className="font-heading italic text-3xl md:text-4xl text-white mb-4">
                       {activeDomain.name}
                     </h3>
-                    <p className="text-white/90 font-body font-light text-base md:text-lg leading-relaxed max-w-xl">
+                    <p className="text-white/90 font-body font-light text-base md:text-lg leading-relaxed tracking-normal max-w-xl">
                       {activeDomain.description}
                     </p>
 
@@ -276,7 +277,7 @@ export const SolutionsSection: React.FC = () => {
                       {activeDomain.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="liquid-glass rounded-full px-3.5 py-1.5 text-xs font-mono text-white/90"
+                          className="liquid-glass rounded-full px-3.5 py-1.5 text-xs font-mono tracking-normal text-white/90"
                         >
                           {tag}
                         </span>

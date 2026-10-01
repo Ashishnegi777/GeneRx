@@ -5,6 +5,7 @@ import { SectionLabel } from './SectionLabel';
 import { BlurText } from './BlurText';
 import { Reveal } from './Reveal';
 import { BrainIcon, ChipIcon, LayersIcon } from './Icons';
+import video from '../video/DNA.mp4';
 
 interface CapabilityCardData {
   title: string;
@@ -42,7 +43,7 @@ export const CapabilitiesSection: React.FC = () => {
     >
       {/* Layer 1: Ambient Tech Refraction Video */}
       <FadingVideo
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4"
+        src={video}
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         style={{
           filter: 'brightness(0.35) contrast(1.2)',

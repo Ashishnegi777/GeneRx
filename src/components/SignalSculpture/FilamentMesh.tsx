@@ -39,10 +39,10 @@ const filamentVertexShader = `
 
     // Flowing breathing wobble (sin of uTime plus progress along the strand)
     float breatheAmp = mix(0.045, 0.016, m);
-    float wave = sin(uTime * 1.5 + aProgress * 9.0 + aRand.y * 6.28);
+    float wave = sin(uTime * 0.9 + aProgress * 9.0 + aRand.y * 6.28);
     vec3 wobble = vec3(
-      sin(uTime * 1.1 + aProgress * 7.0 + aRand.z * 3.14) * breatheAmp,
-      cos(uTime * 1.3 + aProgress * 6.0 + aRand.x * 3.14) * breatheAmp,
+      sin(uTime * 0.65 + aProgress * 7.0 + aRand.z * 3.14) * breatheAmp,
+      cos(uTime * 0.8 + aProgress * 6.0 + aRand.x * 3.14) * breatheAmp,
       wave * breatheAmp * 0.75
     );
 

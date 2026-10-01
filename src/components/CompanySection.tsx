@@ -4,6 +4,7 @@ import { GridBackdrop } from './GridBackdrop';
 import { SectionLabel } from './SectionLabel';
 import { BlurText } from './BlurText';
 import { Reveal } from './Reveal';
+import video from '../video/DNA.mp4';
 
 interface ValueCard {
   title: string;
@@ -33,7 +34,7 @@ export const CompanySection: React.FC = () => {
     >
       {/* Layer 1: Ambient Tech Video */}
       <FadingVideo
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4"
+        src={video}
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         style={{
           filter: 'brightness(0.3) contrast(1.2)',

@@ -8,6 +8,7 @@ export default {
     extend: {
       fontFamily: {
         heading: ["'Instrument Serif'", 'serif'],
+        playfair: ["'Playfair'", 'serif'],
         body: ["'Barlow'", 'sans-serif'],
         mono: ["'JetBrains Mono'", 'monospace'],
       },

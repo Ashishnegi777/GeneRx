@@ -6,6 +6,7 @@ import { SectionLabel } from './SectionLabel';
 import { BlurText } from './BlurText';
 import { Reveal } from './Reveal';
 import { SenseIcon, TransmitIcon, ProcessIcon, LearnIcon, ActIcon } from './Icons';
+import video from '../video/DNA.mp4';
 
 interface PipelineStep {
   step: string;
@@ -66,7 +67,7 @@ export const PlatformSection: React.FC = () => {
     >
       {/* Layer 1: Ambient Tech Pipeline Video */}
       <FadingVideo
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
+        src={video}
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         style={{
           filter: 'brightness(0.32) contrast(1.2)',
