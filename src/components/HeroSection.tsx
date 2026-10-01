@@ -18,12 +18,12 @@ export const HeroSection: React.FC = () => {
         style={{ objectPosition: 'center 45%' }}
       />
 
-      {/* Left gradient — keeps text legible without killing the image */}
+      {/* Center atmospheric vignette — keeps centered text legible while showcasing the background visual */}
       <div
         className="absolute inset-0 pointer-events-none z-[1]"
         style={{
           background:
-            'linear-gradient(105deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.50) 35%, rgba(0,0,0,0.08) 60%, rgba(0,0,0,0.0) 100%)',
+            'radial-gradient(ellipse 80% 65% at 50% 45%, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.40) 55%, rgba(0,0,0,0.75) 100%)',
         }}
       />
       {/* Top + bottom vignette */}
@@ -31,23 +31,23 @@ export const HeroSection: React.FC = () => {
         className="absolute inset-0 pointer-events-none z-[1]"
         style={{
           background:
-            'linear-gradient(to bottom, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.0) 25%, rgba(0,0,0,0.0) 72%, rgba(0,0,0,0.80) 100%)',
+            'linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.0) 22%, rgba(0,0,0,0.0) 68%, rgba(0,0,0,0.85) 100%)',
         }}
       />
 
       {/* ── Content layer ── */}
-      <div className="relative z-10 h-full flex flex-col justify-between">
+      <div className="relative z-10 h-full flex flex-col justify-between items-center">
 
-        {/* TEXT BLOCK — upper-left, matching reference */}
-        <div className="px-8 sm:px-12 md:px-16 lg:px-20 pt-[18vh]">
+        {/* TEXT BLOCK — centered */}
+        <div className="px-6 sm:px-10 lg:px-12 pt-[18vh] sm:pt-[20vh] max-w-4xl mx-auto flex flex-col items-center text-center">
 
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.4, ease, delay: 0.35 }}
-            className="font-heading italic text-white font-normal leading-[1.06] tracking-[-1px]"
-            style={{ fontSize: 'clamp(2.6rem, 5.5vw, 5rem)', maxWidth: '38vw' }}
+            className="font-heading italic text-white font-normal leading-[1.08] tracking-[-1px] text-center"
+            style={{ fontSize: 'clamp(2.5rem, 5.2vw, 4.75rem)', maxWidth: '850px' }}
           >
             Intelligence, Built Into the Physical World
           </motion.h1>
@@ -57,8 +57,8 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.4, ease, delay: 0.65 }}
-            className="font-heading italic text-white/55 font-normal leading-[1.55] mt-5"
-            style={{ fontSize: 'clamp(0.75rem, 1.1vw, 0.95rem)', maxWidth: '26vw' }}
+            className="font-heading italic text-white/65 font-normal leading-[1.6] mt-6 text-center"
+            style={{ fontSize: 'clamp(0.85rem, 1.25vw, 1.1rem)', maxWidth: '580px' }}
           >
             GeneRx designs AI, sensors, and integrated systems that see, sense, and respond. From research to deployed hardware.
           </motion.p>
@@ -68,18 +68,18 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.4, ease, delay: 0.95 }}
-            className="mt-8 flex flex-wrap items-center gap-5"
+            className="mt-8 sm:mt-9 flex flex-wrap items-center justify-center gap-5"
           >
             <a
               href="#solutions"
-              className="group inline-flex items-center gap-2 border border-white/30 hover:border-white/65 text-white text-[0.8rem] font-body font-normal px-5 py-2 rounded-full transition-all duration-300 hover:bg-white/5"
+              className="group inline-flex items-center gap-2 border border-white/30 hover:border-white/65 text-white text-[0.82rem] font-body font-normal px-6 py-2.5 rounded-full transition-all duration-300 hover:bg-white/10 active:scale-95"
             >
               Explore Solutions
               <svg width="11" height="11" viewBox="0 0 13 13" fill="none" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 <path d="M1 12L12 1M12 1H4M12 1V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
-            <a href="#platform" className="text-[0.8rem] text-white/40 hover:text-white/70 font-body transition-colors duration-200">
+            <a href="#platform" className="text-[0.82rem] text-white/45 hover:text-white/80 font-body transition-colors duration-200">
               How We Work ↓
             </a>
           </motion.div>
