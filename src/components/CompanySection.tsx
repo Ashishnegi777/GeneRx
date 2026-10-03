@@ -48,13 +48,13 @@ export const CompanySection: React.FC = () => {
       {/* Layer 3: Contrast Vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black pointer-events-none z-[1]" />
 
-      <div className="relative z-10 px-6 sm:px-8 md:px-16 lg:px-20 max-w-6xl mx-auto w-full flex flex-col items-center justify-center text-center">
+      <div className="relative z-10 px-5 sm:px-8 md:px-16 lg:px-20 max-w-6xl mx-auto w-full flex flex-col items-center justify-center text-center">
         {/* Section Label */}
         <SectionLabel text="// Company" className="text-center" />
 
         {/* Large Statement Heading */}
         <div className="max-w-4xl mt-2">
-          <h2 className="font-heading italic text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-[-3px] text-white">
+          <h2 className="font-heading italic text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] sm:leading-[0.98] md:leading-[0.95] tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] text-white">
             <BlurText
               text="We build technology that measures, understands, and improves the world around us."
               align="center"

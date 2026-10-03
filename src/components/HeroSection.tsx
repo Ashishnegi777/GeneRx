@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import heroImage from '../images/ChatGPT Image Oct 1, 2026, 08_48_06 PM.png';
+import { GlassCube3D } from './GlassCube3D';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -8,7 +9,7 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="top"
-      className="h-screen overflow-hidden bg-black relative select-none"
+      className="h-screen min-h-[100dvh] overflow-hidden bg-black relative select-none"
     >
       {/* Full-bleed hero image */}
       <img
@@ -35,19 +36,31 @@ export const HeroSection: React.FC = () => {
         }}
       />
 
+      <GlassCube3D
+        headlineLines={['Intelligence, Built Into', 'the Physical World']}
+        fontFamily="'Instrument Serif', serif"
+        fontWeight={400}
+        textColor="#ffffff"
+        bgColor="#000000"
+        bgImage={heroImage}
+        headlineCenter={{ x: 0.5, y: 0.288 }}
+        headlineFontSizePx={(W: number) => Math.min(Math.max(40, W * 0.052), 76)}
+        cubeCenter={{ x: 0.517, y: 0.488 }}
+      />
+
       {/* ── Content layer ── */}
       <div className="relative z-10 h-full flex flex-col justify-between items-center">
 
         {/* TEXT BLOCK — centered */}
-        <div className="px-6 sm:px-10 lg:px-12 pt-[18vh] sm:pt-[20vh] max-w-4xl mx-auto flex flex-col items-center text-center">
+        <div className="px-5 sm:px-10 lg:px-12 pt-[14vh] sm:pt-[18vh] md:pt-[20vh] max-w-4xl mx-auto flex flex-col items-center text-center">
 
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.4, ease, delay: 0.35 }}
-            className="font-heading italic text-white font-normal leading-[1.08] tracking-[-1px] text-center"
-            style={{ fontSize: 'clamp(2.5rem, 5.2vw, 4.75rem)', maxWidth: '850px' }}
+            className="font-heading italic text-white font-normal leading-[1.12] sm:leading-[1.08] tracking-[-1px] text-center"
+            style={{ fontSize: 'clamp(2.1rem, 5.2vw, 4.75rem)', maxWidth: '850px' }}
           >
             Intelligence, Built Into the Physical World
           </motion.h1>

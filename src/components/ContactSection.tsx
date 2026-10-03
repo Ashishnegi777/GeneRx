@@ -37,9 +37,9 @@ export const ContactSection: React.FC = () => {
       {/* Layer 3: Contrast Vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black pointer-events-none z-[1]" />
 
-      <div className="relative z-10 px-6 sm:px-8 md:px-16 max-w-3xl mx-auto w-full flex flex-col items-center text-center">
+      <div className="relative z-10 px-5 sm:px-8 md:px-16 max-w-3xl mx-auto w-full flex flex-col items-center text-center">
         {/* Centered Heading */}
-        <h2 className="text-6xl md:text-7xl font-heading italic tracking-[-3px] text-white">
+        <h2 className="text-3xl sm:text-5xl md:text-7xl font-heading italic tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] text-white">
           <BlurText text="Have a system to build?" align="center" />
         </h2>
 

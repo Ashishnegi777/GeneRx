@@ -58,11 +58,11 @@ export const CapabilitiesSection: React.FC = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black pointer-events-none z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 px-6 sm:px-8 md:px-16 lg:px-20 pt-28 pb-16 flex flex-col min-h-screen justify-between max-w-7xl mx-auto w-full">
+      <div className="relative z-10 px-5 sm:px-8 md:px-16 lg:px-20 pt-24 sm:pt-28 pb-16 flex flex-col min-h-screen justify-between max-w-7xl mx-auto w-full">
         {/* Header */}
         <div>
           <SectionLabel text="// Capabilities" />
-          <h2 className="font-heading italic text-6xl md:text-7xl lg:text-[6rem] leading-[0.95] md:leading-[0.9] tracking-[-3px] text-white max-w-4xl">
+          <h2 className="font-heading italic text-3xl sm:text-5xl md:text-6xl lg:text-[6rem] leading-[1.05] sm:leading-[0.95] md:leading-[0.9] tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] text-white max-w-4xl">
             <BlurText text="From research, to real systems" align="start" />
           </h2>
         </div>

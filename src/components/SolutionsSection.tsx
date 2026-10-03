@@ -191,11 +191,11 @@ export const SolutionsSection: React.FC = () => {
       {/* Layer 3: Vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black pointer-events-none z-[1]" />
 
-      <div className="relative z-10 px-6 sm:px-8 md:px-16 lg:px-20 pt-28 pb-20 max-w-7xl mx-auto w-full flex flex-col justify-between min-h-screen">
+      <div className="relative z-10 px-5 sm:px-8 md:px-16 lg:px-20 pt-24 sm:pt-28 pb-20 max-w-7xl mx-auto w-full flex flex-col justify-between min-h-screen">
         {/* Header */}
         <div>
           <SectionLabel text="// Solutions" />
-          <h2 className="font-heading italic text-6xl md:text-7xl lg:text-[6rem] leading-[0.95] md:leading-[0.9] tracking-[-3px] text-white max-w-4xl">
+          <h2 className="font-heading italic text-3xl sm:text-5xl md:text-6xl lg:text-[6rem] leading-[1.05] sm:leading-[0.95] md:leading-[0.9] tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] text-white max-w-4xl">
             <BlurText text="Four domains, one engineering core" align="start" />
           </h2>
         </div>
