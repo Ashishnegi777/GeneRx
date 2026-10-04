@@ -126,10 +126,10 @@ function loadXGeometry() {
         const geo = new TextGeometry("x", {
           font,
           size: 0.58,
-          depth: 0.09,
+          depth: 0.04,
           bevelEnabled: true,
-          bevelThickness: 0.04,
-          bevelSize: 0.03,
+          bevelThickness: 0.02,
+          bevelSize: 0.012,
           bevelOffset: 0,
           bevelSegments: 2,
           curveSegments: 8,
@@ -148,7 +148,7 @@ function loadXGeometry() {
       () => {
         // Fallback: simple box if font fails to load
         console.warn("Font load failed, using fallback box geometry");
-        const fallback = new THREE.BoxGeometry(0.8, 0.8, 0.22);
+        const fallback = new THREE.BoxGeometry(0.8, 0.8, 0.11);
         resolve(fallback);
       }
     );
@@ -333,10 +333,10 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
           sH = hDpr; sW = hDpr * imgAspect; sX = (wDpr - sW) * 0.5; sY = 0;
         }
         ctx.drawImage(bgImgElement, sX, sY, sW, sH);
-        const radGrad = ctx.createRadialGradient(wDpr*0.5,hDpr*0.45,0,wDpr*0.5,hDpr*0.45,Math.max(wDpr,hDpr)*0.6);
-        radGrad.addColorStop(0, 'rgba(0,0,0,0.70)');
-        radGrad.addColorStop(0.55, 'rgba(0,0,0,0.40)');
-        radGrad.addColorStop(1, 'rgba(0,0,0,0.75)');
+        const radGrad = ctx.createRadialGradient(wDpr*0.5,hDpr*0.48,0,wDpr*0.5,hDpr*0.48,Math.max(wDpr,hDpr)*0.7);
+        radGrad.addColorStop(0, 'rgba(0,0,0,0.0)');
+        radGrad.addColorStop(0.6, 'rgba(0,0,0,0.20)');
+        radGrad.addColorStop(1, 'rgba(0,0,0,0.85)');
         ctx.fillStyle = radGrad;
         ctx.fillRect(0, 0, wDpr, hDpr);
       } else {

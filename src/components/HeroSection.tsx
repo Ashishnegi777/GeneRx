@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import heroImage from '../images/ChatGPT Image Oct 1, 2026, 08_48_06 PM.png';
+import heroImage from '../images/creation of adamm.png';
 import { GlassCube3D } from './GlassCube3D';
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -16,112 +16,95 @@ export const HeroSection: React.FC = () => {
         src={heroImage}
         alt="Human and robotic hand reaching toward each other"
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
-        style={{ objectPosition: 'center 45%' }}
+        style={{ objectPosition: 'center 46%' }}
       />
 
-      {/* Center atmospheric vignette — keeps centered text legible while showcasing the background visual */}
+      {/* Subtle edge vignette — leaves hands crystal-clear while softly framing borders */}
       <div
         className="absolute inset-0 pointer-events-none z-[1]"
         style={{
           background:
-            'radial-gradient(ellipse 80% 65% at 50% 45%, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.40) 55%, rgba(0,0,0,0.75) 100%)',
+            'radial-gradient(ellipse 95% 85% at 50% 48%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.35) 78%, rgba(0,0,0,0.92) 100%)',
         }}
       />
-      {/* Top + bottom vignette */}
+      {/* Top and bottom feathering for seamless header and section transition */}
       <div
         className="absolute inset-0 pointer-events-none z-[1]"
         style={{
           background:
-            'linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.0) 22%, rgba(0,0,0,0.0) 68%, rgba(0,0,0,0.85) 100%)',
+            'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.0) 18%, rgba(0,0,0,0.0) 78%, rgba(0,0,0,0.95) 100%)',
         }}
       />
 
+      {/* 3D Glass "x" centered between the outstretched fingertips */}
       <GlassCube3D
-        headlineLines={['Intelligence, Built Into', 'the Physical World']}
+        headlineLines={[]}
         fontFamily="'Instrument Serif', serif"
         fontWeight={400}
         textColor="#ffffff"
         bgColor="#000000"
         bgImage={heroImage}
-        headlineCenter={{ x: 0.5, y: 0.288 }}
-        headlineFontSizePx={(W: number) => Math.min(Math.max(40, W * 0.052), 76)}
-        cubeCenter={{ x: 0.517, y: 0.488 }}
+        scaleFactor={0.78}
+        cubeCenter={{
+          desktop: { x: 0.515, y: 0.488 },
+          mobile: { x: 0.5, y: 0.48 },
+        }}
       />
 
       {/* ── Content layer ── */}
-      <div className="relative z-10 h-full flex flex-col justify-between items-center">
-
-        {/* TEXT BLOCK — centered */}
-        <div className="px-5 sm:px-10 lg:px-12 pt-[14vh] sm:pt-[18vh] md:pt-[20vh] max-w-4xl mx-auto flex flex-col items-center text-center">
-
-          {/* Headline */}
+      <div className="relative z-10 h-full w-full pointer-events-none">
+        {/* Top-Right Title Block (editorial layout matching reference) */}
+        <div className="absolute top-[12vh] sm:top-[14vh] lg:top-[16vh] right-[6vw] sm:right-[8vw] lg:right-[10vw] max-w-[88vw] sm:max-w-lg lg:max-w-2xl text-left pointer-events-auto">
           <motion.h1
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.4, ease, delay: 0.35 }}
-            className="font-heading italic text-white font-normal leading-[1.12] sm:leading-[1.08] tracking-[-1px] text-center"
-            style={{ fontSize: 'clamp(2.1rem, 5.2vw, 4.75rem)', maxWidth: '850px' }}
+            transition={{ duration: 1.3, ease, delay: 0.25 }}
+            className="font-heading italic text-white font-normal leading-[1.08] tracking-[-0.015em] text-[2.2rem] sm:text-[3.25rem]"
+            style={{ textShadow: '0 2px 24px rgba(0,0,0,0.85)' }}
           >
-            Intelligence, Built Into the Physical World
+            Intelligence, builds
+            <br />
+            into the physical world
           </motion.h1>
-
-          {/* Subtitle — compact, italic, muted */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.4, ease, delay: 0.65 }}
-            className="font-heading italic text-white/65 font-normal leading-[1.6] mt-6 text-center"
-            style={{ fontSize: 'clamp(0.85rem, 1.25vw, 1.1rem)', maxWidth: '580px' }}
-          >
-            GeneRx designs AI, sensors, and integrated systems that see, sense, and respond. From research to deployed hardware.
-          </motion.p>
-
-          {/* CTA row */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.4, ease, delay: 0.95 }}
-            className="mt-8 sm:mt-9 flex flex-wrap items-center justify-center gap-5"
-          >
-            <a
-              href="#solutions"
-              className="group inline-flex items-center gap-2 border border-white/30 hover:border-white/65 text-white text-[0.82rem] font-body font-normal px-6 py-2.5 rounded-full transition-all duration-300 hover:bg-white/10 active:scale-95"
-            >
-              Explore Solutions
-              <svg width="11" height="11" viewBox="0 0 13 13" fill="none" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                <path d="M1 12L12 1M12 1H4M12 1V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
-            <a href="#platform" className="text-[0.82rem] text-white/45 hover:text-white/80 font-body transition-colors duration-200">
-              How We Work ↓
-            </a>
-          </motion.div>
         </div>
 
-        {/* ── Bottom Bar ── */}
+        {/* Bottom-Left Paragraph (descriptive tagline matching reference) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4, ease, delay: 1.2 }}
-          className="flex flex-col items-center gap-3 pb-8 px-4"
+          transition={{ duration: 1.3, ease, delay: 0.55 }}
+          className="absolute bottom-[8vh] sm:bottom-[9vh] lg:bottom-[11vh] left-[6vw] sm:left-[8vw] lg:left-[10vw] max-w-[320px] sm:max-w-[420px] lg:max-w-[460px] pointer-events-auto"
         >
-          <div
-            className="text-[11px] font-mono text-white/45 tracking-[0.08em] uppercase text-center"
-            style={{ textShadow: '0 1px 10px rgba(0,0,0,1)' }}
+          <p
+            className="font-body italic text-white/85 font-light text-[13.5px] sm:text-[14.5px] md:text-[15.5px] leading-[1.55] tracking-normal text-left"
+            style={{ textShadow: '0 1px 14px rgba(0,0,0,0.95)' }}
           >
-            Healthcare · Biosensing · Computer Vision · Smart Environments
-          </div>
+            Sensors and devices designed in-house: from bio-signal capture{' '}
+            <span className="block sm:inline lg:block">
+              to connected nodes that stay reliable in the field.
+            </span>
+          </p>
+        </motion.div>
 
+        {/* Subtle, minimal scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.4, ease, delay: 1.1 }}
+          className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 pointer-events-auto"
+        >
           <a
             href="#research"
             aria-label="Scroll to Capabilities"
-            className="relative w-px h-8 bg-white/20 overflow-hidden cursor-pointer mt-1"
+            className="group flex flex-col items-center gap-1.5 opacity-35 hover:opacity-90 transition-opacity duration-300 cursor-pointer"
           >
-            <motion.div
-              animate={{ y: [-8, 32] }}
-              transition={{ duration: 3.0, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-1.5 h-1.5 -left-[2.5px] relative rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.9)]"
-            />
+            <div className="relative w-px h-7 bg-white/25 overflow-hidden">
+              <motion.div
+                animate={{ y: [-8, 28] }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                className="w-1 h-1 -left-[1.5px] relative rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.9)]"
+              />
+            </div>
           </a>
         </motion.div>
       </div>
