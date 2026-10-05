@@ -10,7 +10,7 @@ import { Footer } from './components/Footer';
 export function App() {
   return (
     <div className="bg-black text-white min-h-screen relative selection:bg-white/20 selection:text-white font-body">
-      {/* Fixed Liquid-Glass Navbar with active link indicator and mobile dropdown */}
+      {/* Fixed top header with logo */}
       <Navbar />
 
       {/* Main Single-Page Sections */}

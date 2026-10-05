@@ -175,14 +175,14 @@ export const HeroSignalBackdrop: React.FC<HeroSignalBackdropProps> = ({
       m.y += (m.ty - m.y) * 0.05;
 
       if (!prefersReducedMotion) {
-        t           += 0.016;    // ~60 fps → 1 t-unit per second
-        globalAngle += 0.00035;  // ~21°/min slow rotation
+        t           += 0.009;    // slowed to ~0.56 t-units/sec for a more meditative pace
+        globalAngle += 0.00018;  // ~11°/min — very slow, majestic rotation
       }
 
       // Macro breathe — whole vortex slowly inhales / exhales
-      const breatheScale = 1 + Math.sin(t * 0.38) * 0.022;
-      // Pulse wave: expands radially from center every ~4s
-      const pulseCycle   = (t * 0.25) % 1;          // 0→1 over 4s
+      const breatheScale = 1 + Math.sin(t * 0.22) * 0.022;
+      // Pulse wave: expands radially from center every ~7s
+      const pulseCycle   = (t * 0.14) % 1;          // 0→1 over ~7s
       const pulseRadius  = pulseCycle;               // 0→1 (normalised)
       const pulseStrength= Math.sin(pulseCycle * Math.PI) * 0.055; // bell-shaped
 

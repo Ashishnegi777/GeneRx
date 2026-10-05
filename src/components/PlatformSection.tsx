@@ -6,6 +6,7 @@ import { SectionLabel } from './SectionLabel';
 import { BlurText } from './BlurText';
 import { Reveal } from './Reveal';
 import { SenseIcon, TransmitIcon, ProcessIcon, LearnIcon, ActIcon } from './Icons';
+import video from '../video/DNA.mp4';
 
 interface PipelineStep {
   step: string;
@@ -66,7 +67,7 @@ export const PlatformSection: React.FC = () => {
     >
       {/* Layer 1: Ambient Tech Pipeline Video */}
       <FadingVideo
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
+        src={video}
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         style={{
           filter: 'brightness(0.32) contrast(1.2)',
@@ -80,11 +81,11 @@ export const PlatformSection: React.FC = () => {
       {/* Layer 3: Contrast Vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black pointer-events-none z-[1]" />
 
-      <div className="relative z-10 px-6 sm:px-8 md:px-16 lg:px-20 pt-28 pb-16 max-w-7xl mx-auto w-full flex flex-col justify-between min-h-screen">
+      <div className="relative z-10 px-5 sm:px-8 md:px-16 lg:px-20 pt-24 sm:pt-28 pb-16 max-w-7xl mx-auto w-full flex flex-col justify-between min-h-screen">
         {/* Header */}
         <div>
           <SectionLabel text="// Platform" />
-          <h2 className="font-heading italic text-6xl md:text-7xl lg:text-[6rem] leading-[0.95] md:leading-[0.9] tracking-[-3px] text-white max-w-4xl">
+          <h2 className="font-heading italic text-3xl sm:text-5xl md:text-6xl lg:text-[6rem] leading-[1.05] sm:leading-[0.95] md:leading-[0.9] tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] text-white max-w-4xl">
             <BlurText text="One pipeline, sensor to insight" align="start" />
           </h2>
         </div>

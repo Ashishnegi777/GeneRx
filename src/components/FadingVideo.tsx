@@ -101,7 +101,24 @@ export const FadingVideo: React.FC<FadingVideoProps> = ({
   };
 
   useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(video);
+
     return () => {
+      observer.disconnect();
       cancelAnimationFrame(animFrameRef.current);
     };
   }, []);

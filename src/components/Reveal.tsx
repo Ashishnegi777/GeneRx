@@ -19,7 +19,7 @@ export const Reveal: React.FC<RevealProps> = ({
       whileInView={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{
-        duration: 0.8,
+        duration: 1.2,
         ease: [0.16, 1, 0.3, 1],
         delay,
       }}

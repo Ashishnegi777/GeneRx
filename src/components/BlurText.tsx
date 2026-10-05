@@ -60,8 +60,8 @@ export const BlurText: React.FC<BlurTextProps> = ({
               : { filter: 'blur(10px)', opacity: 0, y: 50 }
           }
           transition={{
-            duration: 0.7,
-            delay: index * 0.1,
+            duration: 1.1,
+            delay: index * 0.14,
             ease: [0.16, 1, 0.3, 1],
           }}
           style={{
