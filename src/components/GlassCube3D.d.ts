@@ -13,6 +13,11 @@ export interface GlassCube3DProps {
   cubeCenter?: { x: number; y: number } | { desktop?: { x: number; y: number }; mobile?: { x: number; y: number } };
   arms?: number;
   scaleFactor?: number;
+  xLetterScale?: number;
+  showDysonRings?: boolean;
+  dysonRingRadii?: number[];
+  dysonRingTube?: number;
+  dysonRingSpeeds?: number[];
 }
 
 export interface GlassCube3DHandle {

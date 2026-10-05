@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import heroImage from '../images/creation of adamm.png';
+import heroImage from '../images/cretion-of-adam-noise.webp';
 import { GlassCube3D } from './GlassCube3D';
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -35,6 +35,55 @@ export const HeroSection: React.FC = () => {
             'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.0) 18%, rgba(0,0,0,0.0) 78%, rgba(0,0,0,0.95) 100%)',
         }}
       />
+
+      {/* ── Cinematic Ambient Core Bloom (behind the 3D glass structure) ── */}
+      <div
+        className="absolute inset-0 pointer-events-none z-[2] overflow-hidden select-none"
+        aria-hidden="true"
+      >
+        <div
+          className="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-[48%] md:left-[51.5%] md:top-[48.8%]"
+          style={{ mixBlendMode: 'screen' }}
+        >
+          {/* Volumetric atmosphere bloom — soft, diffused, warm golden tungsten haze */}
+          <motion.div
+            animate={{
+              scale: [0.95, 1.08, 0.95],
+              opacity: [0.45, 0.72, 0.45],
+            }}
+            transition={{
+              duration: 6.5,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            className="w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] md:w-[460px] md:h-[460px] rounded-full"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(255, 220, 150, 0.16) 0%, rgba(245, 158, 11, 0.08) 32%, rgba(56, 189, 248, 0.03) 58%, transparent 75%)',
+              filter: 'blur(50px)',
+            }}
+          />
+
+          {/* Whispering anamorphic lens filament — delicate, faint horizontal optical streak */}
+          <motion.div
+            animate={{
+              scaleX: [0.92, 1.08, 0.92],
+              opacity: [0.18, 0.35, 0.18],
+            }}
+            transition={{
+              duration: 5.2,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] sm:w-[260px] md:w-[320px] h-[1px]"
+            style={{
+              background:
+                'linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.25) 25%, rgba(255, 245, 215, 0.6) 50%, rgba(251, 191, 36, 0.3) 75%, transparent 100%)',
+              filter: 'blur(0.8px)',
+            }}
+          />
+        </div>
+      </div>
 
       {/* 3D Glass "x" centered between the outstretched fingertips */}
       <GlassCube3D

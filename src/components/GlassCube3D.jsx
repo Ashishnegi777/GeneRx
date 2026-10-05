@@ -175,6 +175,11 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
     cubeCenter = { x: 0.517, y: 0.488 },
     arms = 6,
     scaleFactor = 0.75,
+    xLetterScale = 0.72,
+    showDysonRings = true,
+    dysonRingRadii = [0.48, 0.58, 0.68],
+    dysonRingTube = 0.012,
+    dysonRingSpeeds = [0.006, -0.0045, 0.0035],
   },
   ref
 ) {
@@ -233,6 +238,7 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
     // starMesh placeholder — geometry is set asynchronously after font loads
     let xGeo = null;
     const starMesh = new THREE.Mesh();
+    starMesh.scale.setScalar(xLetterScale);
     spinner.add(starMesh);
 
     // Load 'x' geometry from Instrument Serif Italic font
@@ -309,6 +315,65 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
       transparent: true,
     });
 
+    // 3 Dyson sphere glass rings surrounding the 'x' letter
+    // Mounted to pivot (NOT spinner) so they don't tumble on the X letter's axis,
+    // but tilted at the exact same base 3D orientation as the X letter (-0.42, 0.62, 0.18)
+    const dysonGroup = new THREE.Group();
+    dysonGroup.rotation.set(-0.42, 0.62, 0.18);
+    pivot.add(dysonGroup);
+
+    const ringGeos = [];
+    const ringItems = [];
+    const ringMeshes = [];
+
+    if (showDysonRings) {
+      // 3 rings encircling the X letter closely, each rotating on its OWN local axis
+      const ringConfigs = [
+        {
+          radius: dysonRingRadii[0] || 0.48,
+          tube: dysonRingTube || 0.012,
+          rx: 0.25,
+          ry: 0.20,
+          rz: 0.10,
+          axis: new THREE.Vector3(0, 1, 0), // rotates around its own local Y axis
+          speed: (dysonRingSpeeds[0] ?? 0.006),
+        },
+        {
+          radius: dysonRingRadii[1] || 0.58,
+          tube: dysonRingTube || 0.012,
+          rx: 1.15,
+          ry: 0.35,
+          rz: 0.40,
+          axis: new THREE.Vector3(1, 0, 0), // rotates around its own local X axis
+          speed: (dysonRingSpeeds[1] ?? -0.0045),
+        },
+        {
+          radius: dysonRingRadii[2] || 0.68,
+          tube: dysonRingTube || 0.012,
+          rx: -0.95,
+          ry: -0.30,
+          rz: -0.45,
+          axis: new THREE.Vector3(0.5, 0.866, 0).normalize(), // rotates around its own diagonal axis
+          speed: (dysonRingSpeeds[2] ?? 0.0035),
+        },
+      ];
+
+      ringConfigs.forEach((cfg) => {
+        const geo = new THREE.TorusGeometry(cfg.radius, cfg.tube, 24, 80);
+        ringGeos.push(geo);
+
+        const holder = new THREE.Group();
+        holder.rotation.set(cfg.rx, cfg.ry, cfg.rz);
+
+        const mesh = new THREE.Mesh(geo, frontMat);
+        holder.add(mesh);
+        dysonGroup.add(holder);
+
+        ringItems.push({ mesh, cfg });
+        ringMeshes.push(mesh);
+      });
+    }
+
     const redrawHeadlineCanvas = () => {
       const W = container.clientWidth;
       const H = container.clientHeight;
@@ -339,6 +404,18 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
         radGrad.addColorStop(1, 'rgba(0,0,0,0.85)');
         ctx.fillStyle = radGrad;
         ctx.fillRect(0, 0, wDpr, hDpr);
+
+        // Cinematic ambient core warmth baked into the refraction canvas
+        const sparkX = wDpr * 0.515;
+        const sparkY = hDpr * 0.488;
+        const sparkRadius = Math.min(wDpr, hDpr) * 0.20;
+        const sparkGrad = ctx.createRadialGradient(sparkX, sparkY, 0, sparkX, sparkY, sparkRadius);
+        sparkGrad.addColorStop(0, 'rgba(255, 230, 180, 0.14)');
+        sparkGrad.addColorStop(0.35, 'rgba(251, 191, 36, 0.06)');
+        sparkGrad.addColorStop(0.70, 'rgba(56, 189, 248, 0.02)');
+        sparkGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = sparkGrad;
+        ctx.fillRect(sparkX - sparkRadius, sparkY - sparkRadius, sparkRadius * 2, sparkRadius * 2);
       } else {
         ctx.fillStyle = bgColor;
         ctx.fillRect(0, 0, wDpr, hDpr);
@@ -452,6 +529,12 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
       spinner.quaternion.premultiply(_qY);
       spinner.quaternion.premultiply(_qX);
 
+      // Each Dyson ring rotates smoothly on its OWN local axis
+      for (let i = 0; i < ringItems.length; i++) {
+        const { mesh, cfg } = ringItems[i];
+        mesh.rotateOnAxis(cfg.axis, cfg.speed * (dt * 60));
+      }
+
       const H = container.clientHeight || 800;
       const W = container.clientWidth || 1280;
       const visH = 2 * Math.tan(fovRad / 2) * 10;
@@ -471,6 +554,9 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
       renderer.clear();
       renderer.render(bgScene, bgCamera);
       starMesh.material = backMat;
+      for (let i = 0; i < ringMeshes.length; i++) {
+        ringMeshes[i].material = backMat;
+      }
       renderer.autoClear = false;
       renderer.render(scene, camera);
 
@@ -478,6 +564,9 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
       renderer.setClearColor(0x000000, 0);
       renderer.clear();
       starMesh.material = frontMat;
+      for (let i = 0; i < ringMeshes.length; i++) {
+        ringMeshes[i].material = frontMat;
+      }
       renderer.render(scene, camera);
       renderer.autoClear = true;
     };
@@ -495,6 +584,7 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
       if (disposed) { loadedGeo.dispose(); return; }
       xGeo = loadedGeo;
       starMesh.geometry = xGeo;
+      starMesh.scale.setScalar(xLetterScale);
       layout();
       lastFrameTime = performance.now();
       animate();
@@ -510,6 +600,7 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
       quadGeo.dispose();
       quadMat.dispose();
       if (xGeo) xGeo.dispose();
+      ringGeos.forEach((geo) => geo.dispose());
       frontMat.dispose();
       backMat.dispose();
       canvasTexture.dispose();
@@ -518,7 +609,8 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
       renderer.dispose();
     };
   }, [headlineLines, fontFamily, fontWeight, fontStyle, textColor, bgColor, bgImage,
-      headlineCenter, headlineFontSizePx, cubeCenter, arms, scaleFactor]);
+      headlineCenter, headlineFontSizePx, cubeCenter, arms, scaleFactor, xLetterScale,
+      showDysonRings, dysonRingRadii, dysonRingTube, dysonRingSpeeds]);
 
   return (
     <canvas
