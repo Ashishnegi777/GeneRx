@@ -18,6 +18,13 @@ export interface GlassCube3DProps {
   dysonRingRadii?: number[];
   dysonRingTube?: number;
   dysonRingSpeeds?: number[];
+  dysonCycleDuration?: number;
+  dysonActiveDuration?: number;
+  dysonPeakSpeed?: number;
+  dysonDelays?: number[];
+  dysonMoveDuration?: number;
+  dysonPauseDuration?: number;
+  dysonStrokeAngle?: number;
 }
 
 export interface GlassCube3DHandle {

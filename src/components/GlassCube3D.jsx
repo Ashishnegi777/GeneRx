@@ -179,7 +179,10 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
     showDysonRings = true,
     dysonRingRadii = [0.48, 0.58, 0.68],
     dysonRingTube = 0.012,
-    dysonRingSpeeds = [0.006, -0.0045, 0.0035],
+    dysonDelays = [0.0, 0.5, 1.1],
+    dysonMoveDuration = 1.8,
+    dysonPauseDuration = 1.2,
+    dysonStrokeAngle = Math.PI,
   },
   ref
 ) {
@@ -327,34 +330,34 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
     const ringMeshes = [];
 
     if (showDysonRings) {
-      // 3 rings encircling the X letter closely, each rotating on its OWN local axis
+      // All 3 rings start at the exact same point (nested concentric in the same plane)
+      const commonAxis = new THREE.Vector3(0.35, 0.92, 0.15).normalize();
+      const baseTilt = { rx: 0.28, ry: 0.18, rz: 0.05 };
+
       const ringConfigs = [
         {
           radius: dysonRingRadii[0] || 0.48,
           tube: dysonRingTube || 0.012,
-          rx: 0.25,
-          ry: 0.20,
-          rz: 0.10,
-          axis: new THREE.Vector3(0, 1, 0), // rotates around its own local Y axis
-          speed: (dysonRingSpeeds[0] ?? 0.006),
+          rx: baseTilt.rx,
+          ry: baseTilt.ry,
+          rz: baseTilt.rz,
+          axis: commonAxis,
         },
         {
           radius: dysonRingRadii[1] || 0.58,
           tube: dysonRingTube || 0.012,
-          rx: 1.15,
-          ry: 0.35,
-          rz: 0.40,
-          axis: new THREE.Vector3(1, 0, 0), // rotates around its own local X axis
-          speed: (dysonRingSpeeds[1] ?? -0.0045),
+          rx: baseTilt.rx,
+          ry: baseTilt.ry,
+          rz: baseTilt.rz,
+          axis: commonAxis,
         },
         {
           radius: dysonRingRadii[2] || 0.68,
           tube: dysonRingTube || 0.012,
-          rx: -0.95,
-          ry: -0.30,
-          rz: -0.45,
-          axis: new THREE.Vector3(0.5, 0.866, 0).normalize(), // rotates around its own diagonal axis
-          speed: (dysonRingSpeeds[2] ?? 0.0035),
+          rx: baseTilt.rx,
+          ry: baseTilt.ry,
+          rz: baseTilt.rz,
+          axis: commonAxis,
         },
       ];
 
@@ -529,10 +532,41 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
       spinner.quaternion.premultiply(_qY);
       spinner.quaternion.premultiply(_qX);
 
-      // Each Dyson ring rotates smoothly on its OWN local axis
-      for (let i = 0; i < ringItems.length; i++) {
-        const { mesh, cfg } = ringItems[i];
-        mesh.rotateOnAxis(cfg.axis, cfg.speed * (dt * 60));
+      // Sequential chase choreography:
+      // Three rings start at the same point.
+      // Ring 0 moves first.
+      // After 0.7s, Ring 1 moves towards it with ease-in-out.
+      // After 0.5s (1.2s total), Ring 2 moves after towards it with ease-in-out.
+      const ringCount = ringItems.length;
+      if (ringCount > 0) {
+        const delays = dysonDelays || [0.0, 0.5, 1.22];
+        const moveDur = dysonMoveDuration || 1.8;
+        const pauseDur = dysonPauseDuration || 1.2;
+        const stroke = dysonStrokeAngle || Math.PI;
+
+        const maxDelay = Math.max(...delays);
+        const cycle = maxDelay + moveDur + pauseDur;
+
+        const cycleIndex = Math.floor(elapsed / cycle);
+        const timeInCycle = elapsed - cycleIndex * cycle;
+        const baseAngle = cycleIndex * stroke;
+
+        for (let i = 0; i < ringCount; i++) {
+          const { mesh, cfg } = ringItems[i];
+          const delay = delays[i] || 0;
+
+          let currentAngle = baseAngle;
+          if (timeInCycle >= delay + moveDur) {
+            currentAngle = baseAngle + stroke;
+          } else if (timeInCycle > delay) {
+            const p = (timeInCycle - delay) / moveDur;
+            // Smooth ease-in-out cubic curve
+            const easedP = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+            currentAngle = baseAngle + easedP * stroke;
+          }
+
+          mesh.quaternion.setFromAxisAngle(cfg.axis, currentAngle);
+        }
       }
 
       const H = container.clientHeight || 800;
@@ -610,7 +644,8 @@ export const GlassCube3D = forwardRef(function GlassCube3D(
     };
   }, [headlineLines, fontFamily, fontWeight, fontStyle, textColor, bgColor, bgImage,
       headlineCenter, headlineFontSizePx, cubeCenter, arms, scaleFactor, xLetterScale,
-      showDysonRings, dysonRingRadii, dysonRingTube, dysonRingSpeeds]);
+      showDysonRings, dysonRingRadii, dysonRingTube,
+      dysonDelays, dysonMoveDuration, dysonPauseDuration, dysonStrokeAngle]);
 
   return (
     <canvas
