@@ -6,7 +6,7 @@ import { SectionLabel } from './SectionLabel';
 import { BlurText } from './BlurText';
 import { Reveal } from './Reveal';
 import { SenseIcon, TransmitIcon, ProcessIcon, LearnIcon, ActIcon } from './Icons';
-import video from '../video/DNA.mp4';
+import video from '../video/the-box.mp4';
 
 interface PipelineStep {
   step: string;

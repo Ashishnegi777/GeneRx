@@ -1,23 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import heroImage from '../images/creation of adamm.png';
+import heroDesktop from '../images/creation of adamm.png';
+import heroMobile from '../images/creation-of-adam-mobile-version.png';
 import { GlassCube3D } from './GlassCube3D';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export const HeroSection: React.FC = () => {
+  const [isMobile, setIsMobile] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768 || window.innerWidth / window.innerHeight < 1;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768 || window.innerWidth / window.innerHeight < 1);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const activeHeroImage = isMobile ? heroMobile : heroDesktop;
+
   return (
     <section
       id="top"
       className="h-screen min-h-[100dvh] overflow-hidden bg-black relative select-none"
     >
-      {/* Full-bleed hero image */}
-      <img
-        src={heroImage}
-        alt="Human and robotic hand reaching toward each other"
-        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
-        style={{ objectPosition: 'center 46%' }}
-      />
+      {/* Full-bleed responsive hero image: creation-of-adam-mobile-version on mobile devices */}
+      <picture className="absolute inset-0 w-full h-full z-0 pointer-events-none">
+        <source media="(max-width: 768px)" srcSet={heroMobile} />
+        <source media="(orientation: portrait) and (max-width: 1024px)" srcSet={heroMobile} />
+        <img
+          src={heroDesktop}
+          alt="Creation of Adam - Human and robotic hand reaching toward each other"
+          className="w-full h-full object-cover object-center md:[object-position:center_46%]"
+        />
+      </picture>
 
       {/* Subtle edge vignette — leaves hands crystal-clear while softly framing borders */}
       <div
@@ -43,7 +65,7 @@ export const HeroSection: React.FC = () => {
         fontWeight={400}
         textColor="#ffffff"
         bgColor="#000000"
-        bgImage={heroImage}
+        bgImage={activeHeroImage}
         scaleFactor={0.78}
         cubeCenter={{
           desktop: { x: 0.515, y: 0.488 },
@@ -73,10 +95,10 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.3, ease, delay: 0.55 }}
-          className="absolute bottom-[8vh] sm:bottom-[9vh] lg:bottom-[11vh] left-[6vw] sm:left-[8vw] lg:left-[10vw] max-w-[320px] sm:max-w-[420px] lg:max-w-[460px] pointer-events-auto"
+          className="absolute bottom-[8vh] sm:bottom-[9vh] lg:bottom-[11vh] left-[6vw] sm:left-[8vw] lg:left-[10vw] max-w-[340px] sm:max-w-[420px] lg:max-w-[480px] pointer-events-auto"
         >
           <p
-            className="font-body italic text-white/85 font-light text-[13.5px] sm:text-[14.5px] md:text-[15.5px] leading-[1.55] tracking-normal text-left"
+            className="font-body italic text-white/90 font-normal text-[15px] sm:text-[15.5px] md:text-base leading-[1.6] tracking-normal text-left"
             style={{ textShadow: '0 1px 14px rgba(0,0,0,0.95)' }}
           >
             Sensors and devices designed in-house: from bio-signal capture{' '}

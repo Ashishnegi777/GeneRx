@@ -87,41 +87,107 @@ const domains: DomainItem[] = [
     tags: ['Detection', 'Inspection', 'Edge Inference'],
     renderDiagram: () => (
       <svg viewBox="0 0 320 80" className="w-full h-20 text-white/50 overflow-visible" fill="none">
-        <motion.rect
-          x="50"
-          y="10"
-          width="220"
-          height="60"
-          rx="6"
+        {/* Optical Axis / Horizon Ray spanning the full width */}
+        <motion.path
+          d="M 0 40 H 80 M 240 40 H 320"
           stroke="currentColor"
-          strokeWidth="1"
-          strokeDasharray="6 4"
+          strokeWidth="1.5"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
-          transition={{ duration: 1.6 }}
+          transition={{ duration: 1.8, ease: 'easeInOut' }}
         />
         <motion.path
-          d="M 40 20 H 50 V 10 M 270 10 V 20 H 280 M 40 60 H 50 V 70 M 270 70 V 60 H 280"
+          d="M 80 40 H 240"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeDasharray="4 4"
+          className="text-white/20"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 1.8, delay: 0.2 }}
+        />
+
+        {/* Optical Frustum Sightlines expanding from lens on left */}
+        <motion.path
+          d="M 20 40 L 80 18 M 20 40 L 80 62"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeDasharray="3 3"
+          className="text-white/30"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 1.5 }}
+        />
+
+        {/* Primary Object Detection Bounding Box */}
+        <motion.rect
+          x="95"
+          y="16"
+          width="130"
+          height="48"
+          rx="4"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2.0, ease: 'easeInOut' }}
+        />
+
+        {/* Precision Corner Brackets around Bounding Box */}
+        <motion.path
+          d="M 88 24 V 16 H 96 M 224 16 H 232 V 24 M 88 56 V 64 H 96 M 224 64 H 232 V 56"
           stroke="white"
           strokeWidth="1.5"
           initial={{ pathLength: 0 }}
           animate={{ pathLength: 1 }}
-          transition={{ duration: 1.4, delay: 0.2 }}
+          transition={{ duration: 1.6, delay: 0.3 }}
         />
+
+        {/* Feature Morphology / Keypoint Skeleton Mesh */}
+        <motion.path
+          d="M 125 46 L 145 28 L 180 34 L 195 50 L 160 54 Z M 145 28 L 160 54"
+          stroke="currentColor"
+          strokeWidth="1"
+          strokeDasharray="3 3"
+          className="text-white/40"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 1.8, delay: 0.4 }}
+        />
+
+        {/* Target Centroid Reticle */}
         <motion.circle
           cx="160"
           cy="40"
           r="6"
           stroke="white"
-          strokeWidth="1.5"
+          strokeWidth="1"
+          strokeDasharray="2 2"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.6 }}
         />
-        <line x1="160" y1="20" x2="160" y2="30" stroke="white" strokeWidth="1" />
-        <line x1="160" y1="50" x2="160" y2="60" stroke="white" strokeWidth="1" />
-        <line x1="140" y1="40" x2="150" y2="40" stroke="white" strokeWidth="1" />
-        <line x1="170" y1="40" x2="180" y2="40" stroke="white" strokeWidth="1" />
+
+        {/* Feature Keypoint Nodes */}
+        {[
+          { cx: 20, cy: 40 },
+          { cx: 125, cy: 46 },
+          { cx: 145, cy: 28 },
+          { cx: 160, cy: 40 },
+          { cx: 180, cy: 34 },
+          { cx: 195, cy: 50 },
+        ].map((pt, i) => (
+          <motion.circle
+            key={i}
+            cx={pt.cx}
+            cy={pt.cy}
+            r="2.5"
+            fill="white"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.3 + i * 0.08 }}
+          />
+        ))}
       </svg>
     ),
   },

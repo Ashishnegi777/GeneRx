@@ -4,7 +4,7 @@ import { GridBackdrop } from './GridBackdrop';
 import { SectionLabel } from './SectionLabel';
 import { BlurText } from './BlurText';
 import { Reveal } from './Reveal';
-import video from '../video/DNA.mp4';
+import video from '../video/the-box.mp4';
 
 interface ValueCard {
   title: string;
@@ -37,7 +37,7 @@ export const CompanySection: React.FC = () => {
         src={video}
         className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
         style={{
-          filter: 'brightness(0.3) contrast(1.2)',
+          filter: 'brightness(0.5) contrast(1.2)',
           opacity: 0.35,
         }}
       />
