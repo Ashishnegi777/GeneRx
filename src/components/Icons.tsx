@@ -288,3 +288,129 @@ export const ActIcon: React.FC<IconProps> = ({ size = 24, className = '', ...pro
     <polygon points="13 2 4 13 11 13 10 22 20 11 13 11 14 2" />
   </svg>
 );
+
+export const ArrowLeft: React.FC<IconProps> = ({ size = 24, className = '', ...props }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    {...props}
+  >
+    <line x1="19" y1="12" x2="5" y2="12" />
+    <polyline points="12 19 5 12 12 5" />
+  </svg>
+);
+
+export const ScanFaceIcon: React.FC<IconProps> = ({ size = 24, className = '', ...props }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    {...props}
+  >
+    {/* Corner focus brackets */}
+    <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+    <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+    <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+    <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+    {/* Facial features */}
+    <circle cx="9" cy="10" r="1" fill="currentColor" />
+    <circle cx="15" cy="10" r="1" fill="currentColor" />
+    <path d="M10 14a2 2 0 0 0 4 0" />
+    <path d="M12 10v2" />
+  </svg>
+);
+
+export const DnaFlaskIcon: React.FC<IconProps> = ({ size = 24, className = '', ...props }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    {...props}
+  >
+    {/* Flask contour */}
+    <path d="M10 2v5.5L4.5 17.5A3 3 0 0 0 7.1 22h9.8a3 3 0 0 0 2.6-4.5L14 7.5V2" />
+    <line x1="9" y1="2" x2="15" y2="2" />
+    {/* DNA helix lines inside fluid */}
+    <path d="M8 15c2-1 4 1 6 0" />
+    <path d="M8 18c2 1 4-1 6 0" />
+    <circle cx="10" cy="11" r="0.75" fill="currentColor" />
+    <circle cx="14" cy="13" r="0.75" fill="currentColor" />
+  </svg>
+);
+
+export const FirstAidIcon: React.FC<IconProps> = ({ size = 24, className = '', ...props }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    {...props}
+  >
+    {/* Box with top handle */}
+    <rect x="3" y="6" width="18" height="15" rx="3" />
+    <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+    {/* Red cross emblem */}
+    <path d="M12 10v7" />
+    <path d="M8.5 13.5h7" />
+  </svg>
+);
+
+export const ShieldCheckIcon: React.FC<IconProps> = ({ size = 24, className = '', ...props }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    {...props}
+  >
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    <polyline points="9 12 11 14 15 10" />
+  </svg>
+);
+
+export const ActivityIcon: React.FC<IconProps> = ({ size = 24, className = '', ...props }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    {...props}
+  >
+    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+  </svg>
+);
+
