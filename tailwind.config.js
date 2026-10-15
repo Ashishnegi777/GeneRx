@@ -9,7 +9,9 @@ export default {
       fontFamily: {
         heading: ["'Instrument Serif'", 'serif'],
         playfair: ["'Playfair'", 'serif'],
-        body: ["'Barlow'", 'sans-serif'],
+        body: ["'Poppins'", 'sans-serif'],
+        secondary: ["'Poppins'", 'sans-serif'],
+        poppins: ["'Poppins'", 'sans-serif'],
         mono: ["'JetBrains Mono'", 'monospace'],
       },
     },

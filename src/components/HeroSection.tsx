@@ -98,8 +98,13 @@ export const HeroSection: React.FC = () => {
           className="absolute bottom-[8vh] sm:bottom-[9vh] lg:bottom-[11vh] left-[6vw] sm:left-[8vw] lg:left-[10vw] max-w-[340px] sm:max-w-[420px] lg:max-w-[480px] pointer-events-auto"
         >
           <p
-            className="font-body italic text-white/90 font-normal text-[15px] sm:text-[15.5px] md:text-base leading-[1.6] tracking-normal text-left"
-            style={{ textShadow: '0 1px 14px rgba(0,0,0,0.95)' }}
+            className="font-poppins italic text-white/90 text-[15px] sm:text-[15.5px] md:text-base leading-[1.6] tracking-normal text-left"
+            style={{
+              fontFamily: "'Poppins', sans-serif",
+              fontWeight: 150,
+              fontStyle: 'italic',
+              textShadow: '0 1px 14px rgba(0,0,0,0.95)',
+            }}
           >
             Sensors and devices designed in-house: from bio-signal capture{' '}
             <span className="block sm:inline lg:block">
